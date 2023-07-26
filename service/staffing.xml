@@ -1,0 +1,9 @@
+<service>
+    <id>staffing</id>
+    <name>staffing</name>
+    <description>Boss to iSpring integration service.</description>
+    <env name="MYAPP_HOME" value="%BASE%"/>
+    <executable>java</executable>
+    <arguments>-Xmx256m -jar "%BASE%\MyApp.jar"</arguments>
+    <logmode>rotate</logmode>
+</service>

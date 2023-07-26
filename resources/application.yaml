@@ -1,0 +1,52 @@
+info:
+  description: Application 'integration-staffing' does periodically tasks for synchronization users and departments from BOSS system to iSpring system
+
+spring:
+  application:
+    name: integration-staffing
+  ## OracleDB connection settings
+  datasource:
+#    url: jdbc:oracle:thin:@//localhost:11521/ORCL
+#    username: USER
+#    password: PASSWORD
+    driver-class-name: oracle.jdbc.OracleDriver
+#    ## HikariCP settings
+    hikari:
+      minimumIdle: 5
+      maximumPoolSize: 20
+      idleTimeout: 30000
+      maxLifetime: 2000000
+      connectionTimeout: 30000
+      poolName: HikariPoolStaffing
+#    ## Oracle UCP settings
+#    type: oracle.ucp.jdbc.UCPDataSource
+#    oracleucp:
+#      connection-factory-class-name: oracle.jdbc.pool.OracleDataSource
+#      sql-for-validate-connection: select * from dual
+#      connection-pool-name: UcpPoolBooks
+#      initial-pool-size: 5
+#      min-pool-size: 5
+#      max-pool-size: 10
+  ## JPA settings
+  jpa:
+    database-platform: org.hibernate.dialect.Oracle12cDialect
+    hibernate:
+      use-new-id-generator-mappings: false
+      ddl-auto: validate
+
+logging:
+  level:
+    root: INFO
+
+## Application Properties
+staffing:
+  rest:
+    client:
+      iSpring:
+        protocol: https
+        port: 443
+        host: api-learn.ispringlearn.ru
+        x-auth:
+          account-url: https://test.ispringlearn.ru/
+          email: test@mail.ru
+          password: test
